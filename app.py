@@ -13,9 +13,9 @@ def display_file(filename='file1.txt'):
 
     try:
         with codecs.open(filename, 'r', encoding='utf-8', errors='ignore') as file:
-            lines = file.read()
+            lines = file.readlines()
             if start_line and end_line:
-                lines = lines[int(start_line)-1:int(end_line)]
+                lines = lines[int(start_line):int(end_line)+1]
             content = ''.join(lines)
             return render_template('display.html', content=content, filename=filename)
     except FileNotFoundError:
