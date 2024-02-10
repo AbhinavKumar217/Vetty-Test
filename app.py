@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import codecs
 import os
 
 app = Flask(__name__)
@@ -11,8 +12,8 @@ def display_file(filename='file1.txt'):
     end_line = request.args.get('end')
 
     try:
-        with open(filename, 'r', encoding='utf-8') as file:
-            lines = file.readlines()
+        with codecs.open(filename, 'r', encoding='utf-8', errors='ignore') as file:
+            lines = file.read()
             if start_line and end_line:
                 lines = lines[int(start_line)-1:int(end_line)]
             content = ''.join(lines)
